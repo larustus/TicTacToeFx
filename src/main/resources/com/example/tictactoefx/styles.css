@@ -13,3 +13,9 @@
     -fx-padding: 10px 20px; /* Padding */
     -fx-border-color: transparent; /* Remove border */
 }
+
+.label{
+    -fx-font-size: 20px; /* Font size */
+    -fx-text-fill: red; /* White text color */
+    -fx-font-weight: bold;
+}

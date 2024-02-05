@@ -1,24 +1,21 @@
 package com.example.tictactoefx;
 
 public class Game {
-    private Field[][] board = new Field[3][3];
-    private Field[] board2 = new Field[9];
+    private Field[] board = new Field[9];
     private String turn;
 
     public Game() {
-        for (int i=0;i<3;i++){
-            for (int j=0;j<3;j++){
-                Field f = new Field("free");
-                this.board[i][j] = f;
-            }
+        this.turn = "X";
+        for (int i=0;i<9;i++){
+            this.board[i] = new Field();
         }
     }
 
-    public Field[][] getBoard() {
+    public Field[] getBoard() {
         return board;
     }
 
-    public void setBoard(Field[][] board) {
+    public void setBoard(Field[] board) {
         this.board = board;
     }
 
@@ -30,14 +27,42 @@ public class Game {
         this.turn = turn;
     }
 
-    public Field[] getBoard2() {
-        return board2;
+    public void changeTurn(){
+        if (this.turn.equals("X")){
+            this.turn = "O";
+        }else{
+            this.turn = "X";
+        }
+    }
+    public void makeMove(int index){
+        board[index-1].setOccupation(turn);
     }
 
-    public void setBoard2(Field[] board2) {
-        this.board2 = board2;
+    public boolean checkEndgame(){
+        //check rows
+        for (int i=0;i<9;i+=3){
+            if ((board[i].getOccupation().equals(turn)) && (board[i+1].getOccupation().equals(turn)) && (board[i+2].getOccupation().equals(turn))){
+                return true;
+            }
+        }
+
+        //check columns
+        for (int i=0;i<3;i+=1){
+            if ((board[i].getOccupation().equals(turn)) && (board[i+3].getOccupation().equals(turn)) && (board[i+6].getOccupation().equals(turn))){
+                return true;
+            }
+        }
+
+        //check first diagonal
+        if ((board[0].getOccupation().equals(turn)) && (board[4].getOccupation().equals(turn)) && (board[8].getOccupation().equals(turn))){
+            return true;
+        }
+
+        //check second digonal
+        if ((board[2].getOccupation().equals(turn)) && (board[4].getOccupation().equals(turn)) && (board[6].getOccupation().equals(turn))){
+            return true;
+        }
+        return false;
     }
-    public void setField(Field f, int index){
-        this.board2[index] = f;
-    }
+
 }

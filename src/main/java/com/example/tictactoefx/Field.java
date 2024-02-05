@@ -3,8 +3,8 @@ package com.example.tictactoefx;
 public class Field {
     private String occupation;
 
-    public Field(String occupation) {
-        this.occupation = occupation;
+    public Field() {
+        this.occupation = " ";
     }
 
     public String getOccupation() {
